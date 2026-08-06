@@ -1,0 +1,6 @@
+{
+  "mfeSimulacao": "http://localhost:4201/remoteEntry.json",
+  "mfeForms": "http://localhost:4202/remoteEntry.json",
+  "mfeUploads": "http://localhost:4203/remoteEntry.json",
+  "mfeProposta": "http://localhost:4204/remoteEntry.json"
+}

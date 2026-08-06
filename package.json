@@ -1,0 +1,66 @@
+{
+  "name": "credimob-angular-mfe",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start:shell": "ng serve shell",
+    "start:simulacao": "ng serve mfe-simulacao",
+    "start:forms": "ng serve mfe-forms",
+    "start:uploads": "ng serve mfe-uploads",
+    "start:proposta": "ng serve mfe-proposta",
+    "start:all": "concurrently -n shell,simulacao,forms,uploads,proposta -c blue,green,yellow,magenta,cyan \"npm:start:shell\" \"npm:start:simulacao\" \"npm:start:forms\" \"npm:start:uploads\" \"npm:start:proposta\"",
+    "build:all": "ng build shell -c production && ng build mfe-simulacao -c production && ng build mfe-forms -c production && ng build mfe-uploads -c production && ng build mfe-proposta -c production",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "eslint \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "format": "prettier --write \"apps/**/*.{ts,html,scss}\" \"libs/**/*.{ts,html,scss}\"",
+    "prepare": "husky"
+  },
+  "private": true,
+  "packageManager": "npm@11.6.2",
+  "lint-staged": {
+    "*.{ts,html}": [
+      "eslint --fix"
+    ],
+    "*.{ts,html,scss,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@angular/animations": "^21.2.0",
+    "@angular/cdk": "^21.2.14",
+    "@angular/common": "^21.2.0",
+    "@angular/compiler": "^21.2.0",
+    "@angular/core": "^21.2.0",
+    "@angular/forms": "^21.2.0",
+    "@angular/material": "^21.2.14",
+    "@angular/platform-browser": "^21.2.0",
+    "@angular/router": "^21.2.0",
+    "@softarc/native-federation-node": "^3.3.4",
+    "es-module-shims": "^1.5.12",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-architects/native-federation": "^21.2.5",
+    "@angular-devkit/build-angular": "^21.2.20",
+    "@angular/build": "^21.2.20",
+    "@angular/cli": "^21.2.20",
+    "@angular/compiler-cli": "^21.2.0",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "21.4.0",
+    "concurrently": "^10.0.4",
+    "eslint": "^10.3.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "jsdom": "^28.0.0",
+    "lint-staged": "^17.3.0",
+    "ng-packagr": "^21.2.0",
+    "prettier": "^3.8.1",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.59.2",
+    "vitest": "^4.0.8"
+  }
+}

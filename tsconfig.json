@@ -1,0 +1,87 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@credito/shared-ui": ["./libs/shared-ui/src/public-api.ts"],
+      "@credito/shared-models": ["./libs/shared-models/src/public-api.ts"],
+      "@credito/shared-utils": ["./libs/shared-utils/src/public-api.ts"],
+      "@credito/shared-state": ["./libs/shared-state/src/public-api.ts"]
+    },
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/shell/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/shell/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/mfe-simulacao/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/mfe-simulacao/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/mfe-forms/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/mfe-forms/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/mfe-uploads/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/mfe-uploads/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/mfe-proposta/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/mfe-proposta/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/shared-ui/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/shared-ui/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/shared-models/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/shared-models/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/shared-utils/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/shared-utils/tsconfig.spec.json"
+    },
+    {
+      "path": "./libs/shared-state/tsconfig.lib.json"
+    },
+    {
+      "path": "./libs/shared-state/tsconfig.spec.json"
+    }
+  ]
+}
