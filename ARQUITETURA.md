@@ -11,7 +11,8 @@ credimob-angular-mfe/
 │   ├── mfe-simulacao/       # Remote (porta 4201) — simulação de financiamento (SAC/PRICE, taxas, prazos)
 │   ├── mfe-forms/           # Remote (porta 4202) — formulários de dados pessoais/financeiros do proponente
 │   ├── mfe-uploads/         # Remote (porta 4203) — upload/validação de documentos
-│   └── mfe-proposta/        # Remote (porta 4204) — geração/resumo da proposta final
+│   ├── mfe-proposta/        # Remote (porta 4204) — geração/resumo da proposta final
+│   └── mfe-tracking/        # Remote (porta 4205) — acompanhamento do status da proposta
 ├── libs/
 │   ├── shared-ui/           # Componentes visuais compartilhados (design system sobre Angular Material)
 │   ├── shared-models/       # Interfaces/DTOs/tipos compartilhados entre os MFEs
@@ -28,7 +29,7 @@ credimob-angular-mfe/
 
 **Princípios de design:**
 
-- `shell` é o único host (`dynamic-host`); os 4 MFEs são `remote`.
+- `shell` é o único host (`dynamic-host`); os 5 MFEs são `remote`.
 - Cada MFE é standalone, roteável isoladamente (permite rodar sozinho em dev) e exposto via Native Federation.
 - Comunicação entre MFEs feita só via `libs/shared-models` (contratos) e `libs/shared-state` (nunca imports diretos entre apps).
 - Cada MFE tem seu próprio `environment.ts`/`environment.prod.ts` — nenhuma URL fixa hardcoded fora deles.
@@ -63,11 +64,12 @@ ng generate application mfe-simulacao  --routing --style=scss --standalone --pre
 ng generate application mfe-forms      --routing --style=scss --standalone --prefix=frm
 ng generate application mfe-uploads    --routing --style=scss --standalone --prefix=upl
 ng generate application mfe-proposta   --routing --style=scss --standalone --prefix=prp
+ng generate application mfe-tracking   --routing --style=scss --standalone --prefix=trk
 ```
 
-Isso cria `apps/shell`, `apps/mfe-simulacao`, `apps/mfe-forms`, `apps/mfe-uploads`, `apps/mfe-proposta`, cada um com seu `project.json`/entry em `angular.json`.
+Isso cria `apps/shell`, `apps/mfe-simulacao`, `apps/mfe-forms`, `apps/mfe-uploads`, `apps/mfe-proposta`, `apps/mfe-tracking`, cada um com seu `project.json`/entry em `angular.json`.
 
-### 3.1 Portas de dev (`angular.json` → `serve.options` de cada projeto)
+### 3.1 Portas de dev (`angular.json` → `architect["serve-original"].options.port` de cada projeto)
 
 | App           | Porta |
 | ------------- | ----- |
@@ -76,15 +78,16 @@ Isso cria `apps/shell`, `apps/mfe-simulacao`, `apps/mfe-forms`, `apps/mfe-upload
 | mfe-forms     | 4202  |
 | mfe-uploads   | 4203  |
 | mfe-proposta  | 4204  |
+| mfe-tracking  | 4205  |
 
 ```jsonc
 // apps/mfe-simulacao -> angular.json
-"serve": {
+"serve-original": {
   "options": { "port": 4201 }
 }
 ```
 
-(repita para cada app com sua porta correspondente)
+(repita para cada app com sua porta correspondente; a porta é definida automaticamente pelo schematic de init do Native Federation via `--port`, ver seção 4.1)
 
 ---
 
@@ -103,6 +106,7 @@ ng g @angular-architects/native-federation:init --project mfe-simulacao --port 4
 ng g @angular-architects/native-federation:init --project mfe-forms     --port 4202 --type remote
 ng g @angular-architects/native-federation:init --project mfe-uploads   --port 4203 --type remote
 ng g @angular-architects/native-federation:init --project mfe-proposta  --port 4204 --type remote
+ng g @angular-architects/native-federation:init --project mfe-tracking  --port 4205 --type remote
 ```
 
 Isso gera `federation.config.js` na raiz de cada app e ajusta `angular.json` para usar o `esbuild`-based builder do Native Federation (`@angular-architects/native-federation:build` / `:serve`).
@@ -131,7 +135,7 @@ module.exports = withNativeFederation({
 });
 ```
 
-Repita trocando apenas `name` e o caminho do `exposes` para `mfeForms`, `mfeUploads`, `mfeProposta`.
+Repita trocando apenas `name` e o caminho do `exposes` para `mfeForms`, `mfeUploads`, `mfeProposta`, `mfeTracking`.
 
 ### 4.3 `apps/shell/federation.config.js`
 
@@ -160,20 +164,24 @@ module.exports = withNativeFederation({
   "mfeSimulacao": "http://localhost:4201/remoteEntry.json",
   "mfeForms": "http://localhost:4202/remoteEntry.json",
   "mfeUploads": "http://localhost:4203/remoteEntry.json",
-  "mfeProposta": "http://localhost:4204/remoteEntry.json"
+  "mfeProposta": "http://localhost:4204/remoteEntry.json",
+  "mfeTracking": "http://localhost:4205/remoteEntry.json"
 }
 ```
 
-`apps/shell/public/federation.manifest.prod.json` (substituído via `fileReplacements` no build de produção):
+`apps/shell/public/federation.manifest.prod.json` (pensado para ser trocado via `fileReplacements` no build de produção — ver nota no fim desta seção):
 
 ```json
 {
   "mfeSimulacao": "https://simulacao.creditoimobiliario.exemplo.com/remoteEntry.json",
   "mfeForms": "https://forms.creditoimobiliario.exemplo.com/remoteEntry.json",
   "mfeUploads": "https://uploads.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json"
+  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json",
+  "mfeTracking": "https://tracking.creditoimobiliario.exemplo.com/remoteEntry.json"
 }
 ```
+
+> **Nota:** o `angular.json` do projeto `shell` atualmente **não** possui o `fileReplacements` abaixo configurado — é uma lacuna pré-existente (anterior a este remote), fora do escopo da adição do `mfe-tracking`.
 
 `angular.json` (projeto `shell`, configuração `production`):
 
@@ -219,6 +227,10 @@ export const routes: Routes = [
   {
     path: 'proposta',
     loadChildren: () => loadRemoteModule('mfeProposta', './Routes').then(m => m.PROPOSTA_ROUTES),
+  },
+  {
+    path: 'acompanhamento',
+    loadChildren: () => loadRemoteModule('mfeTracking', './Routes').then(m => m.TRACKING_ROUTES),
   },
   { path: '', redirectTo: 'simulacao', pathMatch: 'full' },
 ];
@@ -278,10 +290,12 @@ ng add @angular/material --project mfe-simulacao --theme=custom --typography --a
 ng add @angular/material --project mfe-forms --theme=custom --typography --animations=enabled
 ng add @angular/material --project mfe-uploads --theme=custom --typography --animations=enabled
 ng add @angular/material --project mfe-proposta --theme=custom --typography --animations=enabled
+ng add @angular/material --project mfe-tracking --theme=custom --typography --animations=enabled
 ```
 
 - O tema (`libs/shared-ui/styles/_theme.scss`) é centralizado na lib `shared-ui` e importado por todos os apps, garantindo consistência visual.
 - `@angular/material` e `@angular/cdk` entram no `shareAll` do `federation.config.js` como singleton — evita módulos duplicados entre host/remotes em runtime.
+- O schematic `ng add @angular/material` gera um `material-theme.scss` próprio no app — descarte-o e aponte o `styles.scss` do app para o tema compartilhado (`@use '../../../libs/shared-ui/styles/theme' as theme; @include theme.apply-theme;`), como feito nos demais MFEs.
 
 ---
 
@@ -308,11 +322,19 @@ module.exports = tseslint.config(
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
-        { type: 'attribute', prefix: ['shl', 'sim', 'frm', 'upl', 'prp'], style: 'camelCase' },
+        {
+          type: 'attribute',
+          prefix: ['shl', 'sim', 'frm', 'upl', 'prp', 'trk'],
+          style: 'camelCase',
+        },
       ],
       '@angular-eslint/component-selector': [
         'error',
-        { type: 'element', prefix: ['shl', 'sim', 'frm', 'upl', 'prp'], style: 'kebab-case' },
+        {
+          type: 'element',
+          prefix: ['shl', 'sim', 'frm', 'upl', 'prp', 'trk'],
+          style: 'kebab-case',
+        },
       ],
       'no-restricted-imports': [
         'error',
@@ -426,6 +448,7 @@ module.exports = {
         'forms',
         'uploads',
         'proposta',
+        'tracking',
         'shared-ui',
         'shared-models',
         'shared-utils',
@@ -461,15 +484,16 @@ npm install -D concurrently
     "start:forms": "ng serve mfe-forms",
     "start:uploads": "ng serve mfe-uploads",
     "start:proposta": "ng serve mfe-proposta",
-    "start:all": "concurrently -n shell,simulacao,forms,uploads,proposta -c blue,green,yellow,magenta,cyan \"npm:start:shell\" \"npm:start:simulacao\" \"npm:start:forms\" \"npm:start:uploads\" \"npm:start:proposta\"",
-    "build:all": "ng build shell -c production && ng build mfe-simulacao -c production && ng build mfe-forms -c production && ng build mfe-uploads -c production && ng build mfe-proposta -c production",
+    "start:tracking": "ng serve mfe-tracking",
+    "start:all": "concurrently -n shell,simulacao,forms,uploads,proposta,tracking -c blue,green,yellow,magenta,cyan,red \"npm:start:shell\" \"npm:start:simulacao\" \"npm:start:forms\" \"npm:start:uploads\" \"npm:start:proposta\" \"npm:start:tracking\"",
+    "build:all": "ng build shell -c production && ng build mfe-simulacao -c production && ng build mfe-forms -c production && ng build mfe-uploads -c production && ng build mfe-proposta -c production && ng build mfe-tracking -c production",
     "lint": "eslint \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "format": "prettier --write \"apps/**/*.{ts,html,scss}\" \"libs/**/*.{ts,html,scss}\""
   }
 }
 ```
 
-`npm run start:all` sobe os 5 projetos simultaneamente nas portas 4200–4204.
+`npm run start:all` sobe os 6 projetos simultaneamente nas portas 4200–4205.
 
 ---
 
@@ -511,6 +535,7 @@ ng generate application mfe-simulacao --routing --style=scss --standalone --pref
 ng generate application mfe-forms     --routing --style=scss --standalone --prefix=frm
 ng generate application mfe-uploads   --routing --style=scss --standalone --prefix=upl
 ng generate application mfe-proposta  --routing --style=scss --standalone --prefix=prp
+ng generate application mfe-tracking  --routing --style=scss --standalone --prefix=trk
 
 npm install @angular-architects/native-federation --save-dev
 ng g @angular-architects/native-federation:init --project shell         --port 4200 --type dynamic-host
@@ -518,6 +543,7 @@ ng g @angular-architects/native-federation:init --project mfe-simulacao --port 4
 ng g @angular-architects/native-federation:init --project mfe-forms     --port 4202 --type remote
 ng g @angular-architects/native-federation:init --project mfe-uploads   --port 4203 --type remote
 ng g @angular-architects/native-federation:init --project mfe-proposta  --port 4204 --type remote
+ng g @angular-architects/native-federation:init --project mfe-tracking  --port 4205 --type remote
 
 ng generate library shared-ui     --directory=libs/shared-ui
 ng generate library shared-models --directory=libs/shared-models
@@ -529,6 +555,7 @@ ng add @angular/material --project mfe-simulacao
 ng add @angular/material --project mfe-forms
 ng add @angular/material --project mfe-uploads
 ng add @angular/material --project mfe-proposta
+ng add @angular/material --project mfe-tracking
 
 ng add @angular-eslint/schematics
 npm install -D prettier eslint-config-prettier husky lint-staged @commitlint/cli @commitlint/config-conventional concurrently

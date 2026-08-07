@@ -18,5 +18,9 @@ export const routes: Routes = [
     path: 'proposta',
     loadChildren: () => loadRemoteModule('mfeProposta', './Routes').then(m => m.PROPOSTA_ROUTES),
   },
+  {
+    path: 'acompanhamento',
+    loadChildren: () => loadRemoteModule('mfeTracking', './Routes').then(m => m.TRACKING_ROUTES),
+  },
   { path: '', redirectTo: 'simulacao', pathMatch: 'full' },
 ];

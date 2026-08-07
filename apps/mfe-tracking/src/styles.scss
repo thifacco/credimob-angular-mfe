@@ -1,0 +1,3 @@
+@use '../../../libs/shared-ui/styles/theme' as theme;
+
+@include theme.apply-theme;

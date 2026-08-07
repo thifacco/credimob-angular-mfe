@@ -10,11 +10,19 @@ module.exports = tseslint.config(
     rules: {
       '@angular-eslint/directive-selector': [
         'error',
-        { type: 'attribute', prefix: ['shl', 'sim', 'frm', 'upl', 'prp'], style: 'camelCase' },
+        {
+          type: 'attribute',
+          prefix: ['shl', 'sim', 'frm', 'upl', 'prp', 'trk'],
+          style: 'camelCase',
+        },
       ],
       '@angular-eslint/component-selector': [
         'error',
-        { type: 'element', prefix: ['shl', 'sim', 'frm', 'upl', 'prp'], style: 'kebab-case' },
+        {
+          type: 'element',
+          prefix: ['shl', 'sim', 'frm', 'upl', 'prp', 'trk'],
+          style: 'kebab-case',
+        },
       ],
       'no-restricted-imports': [
         'error',

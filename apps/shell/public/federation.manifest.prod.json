@@ -2,5 +2,6 @@
   "mfeSimulacao": "https://simulacao.creditoimobiliario.exemplo.com/remoteEntry.json",
   "mfeForms": "https://forms.creditoimobiliario.exemplo.com/remoteEntry.json",
   "mfeUploads": "https://uploads.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json"
+  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json",
+  "mfeTracking": "https://tracking.creditoimobiliario.exemplo.com/remoteEntry.json"
 }
