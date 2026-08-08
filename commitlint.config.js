@@ -10,6 +10,7 @@ module.exports = {
         'forms',
         'uploads',
         'proposta',
+        'tracking',
         'shared-ui',
         'shared-models',
         'shared-utils',

@@ -82,6 +82,12 @@
     },
     {
       "path": "./libs/shared-state/tsconfig.spec.json"
+    },
+    {
+      "path": "./apps/mfe-tracking/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/mfe-tracking/tsconfig.spec.json"
     }
   ]
 }
