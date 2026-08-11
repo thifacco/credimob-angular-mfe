@@ -1,4 +1,34 @@
 <section class="trk-tracking-shell">
   <h2>Acompanhamento</h2>
-  <p>MFE responsável pelo acompanhamento do status da proposta.</p>
+  <p>Acompanhe cada etapa da sua jornada de aquisição de crédito.</p>
+
+  <mat-stepper orientation="vertical" [linear]="true" [selectedIndex]="activeStep()">
+    <mat-step
+      label="Simule o valor do financiamento"
+      [completed]="isSimulationCompleted()"
+      [editable]="false"
+    >
+      <p>Simule as condições do seu financiamento imobiliário.</p>
+      <a mat-flat-button routerLink="/simulacao">Simular financiamento agora</a>
+    </mat-step>
+
+    <mat-step label="Preencha os formulários" [completed]="isFormsCompleted()" [editable]="false">
+      <p>Preencha os formulários necessários para dar continuidade ao processo.</p>
+      <a mat-flat-button routerLink="/dados">Preencher formulários</a>
+    </mat-step>
+
+    <mat-step label="Envie os arquivos" [completed]="isUploadsCompleted()" [editable]="false">
+      <p>Envie os documentos exigidos para a análise do seu financiamento.</p>
+      <a mat-flat-button routerLink="/documentos">Enviar documentos</a>
+    </mat-step>
+
+    <mat-step
+      label="Proposta de financiamento"
+      [completed]="isProposalCompleted()"
+      [editable]="false"
+    >
+      <p>Acompanhe a proposta de financiamento gerada para você.</p>
+      <a mat-flat-button routerLink="/proposta">Ver proposta de financiamento</a>
+    </mat-step>
+  </mat-stepper>
 </section>
