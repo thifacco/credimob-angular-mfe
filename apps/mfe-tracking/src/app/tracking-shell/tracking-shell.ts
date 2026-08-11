@@ -1,11 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
+import { RouterLink } from '@angular/router';
 
 import { resolveActiveStep, StepCompletionStatus, TrackingStep } from './step-completion-status';
 
 @Component({
   selector: 'trk-tracking-shell',
-  imports: [MatStepperModule],
+  imports: [MatStepperModule, MatButtonModule, RouterLink],
   templateUrl: './tracking-shell.html',
   styleUrl: './tracking-shell.scss',
 })

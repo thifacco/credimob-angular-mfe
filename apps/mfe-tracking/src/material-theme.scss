@@ -4,3 +4,11 @@
 .mat-stepper-vertical {
   max-width: 640px;
 }
+
+// A navegação entre steps é controlada só pelo StepCompletionStatus (tracking-shell.ts),
+// nunca pelo usuário: mesmo com [editable]="false" o Material mantém cursor/hover de
+// "clicável" em steps concluídos, então bloqueamos o clique explicitamente aqui.
+.mat-step-header {
+  cursor: default;
+  pointer-events: none;
+}
