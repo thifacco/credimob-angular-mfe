@@ -1,0 +1,6 @@
+// Ajustes visuais do Angular Material específicos do mfe-tracking.
+// O tema (cores/tipografia) já vem de libs/shared-ui/styles/_theme.scss via styles.scss;
+// este arquivo é só para overrides pontuais de componentes Material usados aqui.
+.mat-stepper-vertical {
+  max-width: 640px;
+}
