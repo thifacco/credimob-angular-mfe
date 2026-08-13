@@ -1,0 +1,24 @@
+<section class="sim-simulacao-form">
+  @if (imovel(); as imovelSelecionado) {
+    <h2>Simule seu financiamento</h2>
+
+    <div class="sim-simulacao-form__valor">
+      <span class="sim-simulacao-form__valor-label">Valor do imóvel</span>
+      <span class="sim-simulacao-form__valor-value">
+        {{ imovelSelecionado.valor | brlCurrency }}
+      </span>
+    </div>
+
+    <form [formGroup]="form" class="sim-simulacao-form__form">
+      <mat-form-field>
+        <mat-label>Quanto você pretende dar de entrada?</mat-label>
+        <input matInput type="number" formControlName="entrada" />
+        <mat-hint> Mínimo de {{ valorMinimoEntrada() | brlCurrency }} </mat-hint>
+      </mat-form-field>
+
+      <button mat-flat-button type="button" [disabled]="form.invalid">Simular agora</button>
+    </form>
+  } @else {
+    <p>Imóvel não encontrado.</p>
+  }
+</section>
