@@ -8,6 +8,7 @@ export const SIMULACAO_ROUTES: Routes = [
   },
   {
     path: ':id',
+    data: { breadcrumb: 'simular financiamento' },
     loadComponent: () =>
       import('../features/imoveis/simulacao-form/simulacao-form').then(m => m.SimulacaoForm),
   },

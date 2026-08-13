@@ -1,0 +1,18 @@
+@if (items().length > 0) {
+  <nav class="shl-breadcrumb" aria-label="breadcrumb">
+    <ol class="shl-breadcrumb__list">
+      <li class="shl-breadcrumb__item">
+        <a class="shl-breadcrumb__link" routerLink="/">home</a>
+      </li>
+      @for (item of items(); track item.url; let last = $last) {
+        <li class="shl-breadcrumb__item">
+          @if (last) {
+            <span class="shl-breadcrumb__current" aria-current="page">{{ item.label }}</span>
+          } @else {
+            <a class="shl-breadcrumb__link" [routerLink]="item.url">{{ item.label }}</a>
+          }
+        </li>
+      }
+    </ol>
+  </nav>
+}

@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { Breadcrumb } from './features/breadcrumb/breadcrumb';
+
 @Component({
   selector: 'shl-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Breadcrumb],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
