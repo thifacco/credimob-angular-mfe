@@ -5,9 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 
-import { Imovel } from '../imoveis/imovel.model';
-import { ImoveisService } from '../imoveis/imoveis.service';
-import { BrlCurrencyPipe } from '../shared/brl-currency.pipe';
+import { Imovel } from '../data/imovel.model';
+import { ImoveisService } from '../data/imoveis.service';
+import { BrlCurrencyPipe } from '../../../shared/pipes/brl-currency.pipe';
 
 @Component({
   selector: 'sim-simulacao-form',
