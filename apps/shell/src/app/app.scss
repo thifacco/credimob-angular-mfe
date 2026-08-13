@@ -1,0 +1,42 @@
+.shl-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: var(--mat-sys-primary-container);
+  color: var(--mat-sys-on-primary-container);
+}
+
+.shl-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--mat-sys-primary);
+    flex-shrink: 0;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font: var(--mat-sys-title-large);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  &__tagline {
+    font: var(--mat-sys-body-small);
+    opacity: 0.8;
+  }
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}

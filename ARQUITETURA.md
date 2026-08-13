@@ -1,15 +1,16 @@
-# Credito Imobiliário — Monorepo Angular 21 + Native Federation
+# Imobify — Monorepo Angular 21 + Native Federation
 
-Guia de arquitetura e setup do workspace de micro front-ends para simulação de crédito imobiliário.
+Guia de arquitetura e setup do workspace de micro front-ends para a jornada de aquisição de
+imóveis da Imobify, construtora privada fictícia criada para fins de portfólio.
 
 ## 1. Visão geral da arquitetura
 
 ```
-credimob-angular-mfe/
+imobify-angular-mfe/
 ├── apps/
 │   ├── shell/               # Host (porta 4200) — orquestra os MFEs, roteamento raiz, shell layout
 │   ├── mfe-simulacao/       # Remote (porta 4201) — simulação de financiamento (SAC/PRICE, taxas, prazos)
-│   ├── mfe-forms/           # Remote (porta 4202) — formulários de dados pessoais/financeiros do proponente
+│   ├── mfe-forms/           # Remote (porta 4202) — formulários de dados pessoais/financeiros do comprador
 │   ├── mfe-uploads/         # Remote (porta 4203) — upload/validação de documentos
 │   ├── mfe-proposta/        # Remote (porta 4204) — geração/resumo da proposta final
 │   └── mfe-tracking/        # Remote (porta 4205) — acompanhamento do status da proposta
@@ -41,8 +42,8 @@ credimob-angular-mfe/
 ```bash
 npm install -g @angular/cli@21
 
-ng new credito-imobiliario-mfe --create-application=false --package-manager=npm --strict
-cd credito-imobiliario-mfe
+ng new imobify-angular-mfe --create-application=false --package-manager=npm --strict
+cd imobify-angular-mfe
 ```
 
 ### 2.1 Configurar `newProjectRoot` em `angular.json`
@@ -173,11 +174,11 @@ module.exports = withNativeFederation({
 
 ```json
 {
-  "mfeSimulacao": "https://simulacao.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeForms": "https://forms.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeUploads": "https://uploads.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeTracking": "https://tracking.creditoimobiliario.exemplo.com/remoteEntry.json"
+  "mfeSimulacao": "https://simulacao.imobify.exemplo.com/remoteEntry.json",
+  "mfeForms": "https://forms.imobify.exemplo.com/remoteEntry.json",
+  "mfeUploads": "https://uploads.imobify.exemplo.com/remoteEntry.json",
+  "mfeProposta": "https://proposta.imobify.exemplo.com/remoteEntry.json",
+  "mfeTracking": "https://tracking.imobify.exemplo.com/remoteEntry.json"
 }
 ```
 
@@ -269,10 +270,10 @@ ng generate library shared-state   --directory=libs/shared-state
 {
   "compilerOptions": {
     "paths": {
-      "@credito/shared-ui": ["libs/shared-ui/src/public-api.ts"],
-      "@credito/shared-models": ["libs/shared-models/src/public-api.ts"],
-      "@credito/shared-utils": ["libs/shared-utils/src/public-api.ts"],
-      "@credito/shared-state": ["libs/shared-state/src/public-api.ts"],
+      "@imobify/shared-ui": ["libs/shared-ui/src/public-api.ts"],
+      "@imobify/shared-models": ["libs/shared-models/src/public-api.ts"],
+      "@imobify/shared-utils": ["libs/shared-utils/src/public-api.ts"],
+      "@imobify/shared-state": ["libs/shared-state/src/public-api.ts"],
     },
   },
 }
@@ -513,7 +514,7 @@ export const environment = {
 ```typescript
 export const environment = {
   production: true,
-  apiUrl: 'https://api.creditoimobiliario.exemplo.com/simulacao',
+  apiUrl: 'https://api.imobify.exemplo.com/simulacao',
 };
 ```
 
@@ -525,8 +526,8 @@ export const environment = {
 
 ```bash
 npm install -g @angular/cli@21
-ng new credito-imobiliario-mfe --create-application=false --package-manager=npm --strict
-cd credito-imobiliario-mfe
+ng new imobify-angular-mfe --create-application=false --package-manager=npm --strict
+cd imobify-angular-mfe
 
 # ajustar "newProjectRoot": "apps" no angular.json
 

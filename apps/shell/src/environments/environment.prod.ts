@@ -1,5 +1,5 @@
-export const environment = {
+﻿export const environment = {
   production: true,
-  apiUrl: 'https://api.creditoimobiliario.exemplo.com',
+  apiUrl: 'https://api.imobify.exemplo.com',
   federationManifest: 'federation.manifest.prod.json',
 };

@@ -1,6 +1,6 @@
 <section class="trk-tracking-shell">
   <h2>Acompanhamento</h2>
-  <p>Acompanhe cada etapa da sua jornada de aquisição de crédito.</p>
+  <p>Acompanhe cada etapa da jornada de aquisição do seu imóvel com a Imobify.</p>
 
   <mat-stepper orientation="vertical" [linear]="true" [selectedIndex]="activeStep()">
     <mat-step
@@ -8,17 +8,17 @@
       [completed]="isSimulationCompleted()"
       [editable]="false"
     >
-      <p>Simule as condições do seu financiamento imobiliário.</p>
+      <p>Simule as condições de financiamento direto com a construtora.</p>
       <a mat-flat-button routerLink="/simulacao">Simular financiamento agora</a>
     </mat-step>
 
     <mat-step label="Preencha os formulários" [completed]="isFormsCompleted()" [editable]="false">
-      <p>Preencha os formulários necessários para dar continuidade ao processo.</p>
+      <p>Preencha os formulários necessários para dar continuidade à compra do seu imóvel.</p>
       <a mat-flat-button routerLink="/dados">Preencher formulários</a>
     </mat-step>
 
     <mat-step label="Envie os arquivos" [completed]="isUploadsCompleted()" [editable]="false">
-      <p>Envie os documentos exigidos para a análise do seu financiamento.</p>
+      <p>Envie os documentos exigidos para a análise da sua compra.</p>
       <a mat-flat-button routerLink="/documentos">Enviar documentos</a>
     </mat-step>
 
@@ -27,7 +27,7 @@
       [completed]="isProposalCompleted()"
       [editable]="false"
     >
-      <p>Acompanhe a proposta de financiamento gerada para você.</p>
+      <p>Acompanhe a proposta de compra gerada para o seu imóvel.</p>
       <a mat-flat-button routerLink="/proposta">Ver proposta de financiamento</a>
     </mat-step>
   </mat-stepper>
