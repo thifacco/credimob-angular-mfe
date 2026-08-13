@@ -1,0 +1,39 @@
+.shl-breadcrumb {
+  margin-bottom: 1rem;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &:not(:first-child)::before {
+      content: '/';
+      margin: 0 0.5rem;
+      color: var(--mat-sys-outline);
+    }
+  }
+
+  &__link {
+    color: var(--mat-sys-primary);
+    text-decoration: none;
+    font: var(--mat-sys-body-medium);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__current {
+    font: var(--mat-sys-body-medium);
+    font-weight: 700;
+    color: var(--mat-sys-on-surface);
+  }
+}
