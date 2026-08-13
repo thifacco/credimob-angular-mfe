@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { RouterLink } from '@angular/router';
 
@@ -14,5 +15,7 @@ import { BrlCurrencyPipe } from '../../../shared/pipes/brl-currency.pipe';
 export class ImoveisList {
   private readonly imoveisService = inject(ImoveisService);
 
-  protected readonly imoveis = this.imoveisService.getImoveis();
+  protected readonly imoveisResource = rxResource({
+    stream: () => this.imoveisService.getImoveis(),
+  });
 }

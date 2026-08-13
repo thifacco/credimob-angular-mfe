@@ -1,0 +1,4 @@
+{
+  "/api/simulacao/imoveis": "/imoveis",
+  "/api/simulacao/imoveis/:id": "/imoveis/:id"
+}

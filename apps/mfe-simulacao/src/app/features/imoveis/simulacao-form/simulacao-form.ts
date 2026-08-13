@@ -1,11 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute } from '@angular/router';
 
-import { Imovel } from '../data/imovel.model';
 import { ImoveisService } from '../data/imoveis.service';
 import { BrlCurrencyPipe } from '../../../shared/pipes/brl-currency.pipe';
 
@@ -25,11 +25,13 @@ export class SimulacaoForm {
   private readonly route = inject(ActivatedRoute);
   private readonly imoveisService = inject(ImoveisService);
 
-  protected readonly imovel = signal<Imovel | undefined>(
-    this.imoveisService.getImovelById(this.route.snapshot.paramMap.get('id') ?? ''),
-  );
+  protected readonly imovelResource = rxResource({
+    stream: () => this.imoveisService.getImovelById(this.route.snapshot.paramMap.get('id') ?? ''),
+  });
 
-  protected readonly valorMinimoEntrada = computed(() => (this.imovel()?.valor ?? 0) * 0.3);
+  protected readonly valorMinimoEntrada = computed(
+    () => (this.imovelResource.value()?.valor ?? 0) * 0.3,
+  );
 
   protected readonly form = new FormGroup({
     entrada: new FormControl<number | null>(null, [
@@ -37,4 +39,12 @@ export class SimulacaoForm {
       Validators.min(this.valorMinimoEntrada()),
     ]),
   });
+
+  constructor() {
+    effect(() => {
+      const entrada = this.form.controls.entrada;
+      entrada.setValidators([Validators.required, Validators.min(this.valorMinimoEntrada())]);
+      entrada.updateValueAndValidity();
+    });
+  }
 }

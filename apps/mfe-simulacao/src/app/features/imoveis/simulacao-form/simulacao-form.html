@@ -1,5 +1,7 @@
 <section class="sim-simulacao-form">
-  @if (imovel(); as imovelSelecionado) {
+  @if (imovelResource.isLoading()) {
+    <p>Carregando imóvel...</p>
+  } @else if (imovelResource.value(); as imovelSelecionado) {
     <h2>Simule seu financiamento</h2>
 
     <div class="sim-simulacao-form__valor">
