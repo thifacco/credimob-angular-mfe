@@ -1,4 +1,10 @@
-# CredimobAngularMfe
+# Imobify
+
+Projeto de portfólio: front-end da **Imobify**, uma construtora de imóveis privada fictícia,
+construído como um monorepo de micro front-ends em Angular 21 com Native Federation. O app
+acompanha o comprador do imóvel do início ao fim — simulação de financiamento, preenchimento de
+dados, envio de documentos e proposta de compra — cada etapa servida por um MFE independente.
+Detalhes de arquitetura e setup em [ARQUITETURA.md](ARQUITETURA.md).
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.20.
 

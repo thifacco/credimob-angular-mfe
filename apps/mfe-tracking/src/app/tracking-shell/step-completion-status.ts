@@ -1,5 +1,5 @@
 /**
- * Sinalizadores de conclusão de cada etapa da jornada de aquisição de crédito.
+ * Sinalizadores de conclusão de cada etapa da jornada de aquisição do imóvel.
  * Cada flag reflete um fato de negócio ("a simulação foi concluída"), não uma
  * decisão de UI — a UI deriva o step ativo a partir deles via {@link resolveActiveStep}.
  */

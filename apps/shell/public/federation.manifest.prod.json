@@ -1,7 +1,7 @@
-{
-  "mfeSimulacao": "https://simulacao.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeForms": "https://forms.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeUploads": "https://uploads.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeProposta": "https://proposta.creditoimobiliario.exemplo.com/remoteEntry.json",
-  "mfeTracking": "https://tracking.creditoimobiliario.exemplo.com/remoteEntry.json"
+﻿{
+  "mfeSimulacao": "https://simulacao.imobify.exemplo.com/remoteEntry.json",
+  "mfeForms": "https://forms.imobify.exemplo.com/remoteEntry.json",
+  "mfeUploads": "https://uploads.imobify.exemplo.com/remoteEntry.json",
+  "mfeProposta": "https://proposta.imobify.exemplo.com/remoteEntry.json",
+  "mfeTracking": "https://tracking.imobify.exemplo.com/remoteEntry.json"
 }

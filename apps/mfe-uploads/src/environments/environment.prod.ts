@@ -1,4 +1,4 @@
-export const environment = {
+﻿export const environment = {
   production: true,
-  apiUrl: 'https://api.creditoimobiliario.exemplo.com/documentos',
+  apiUrl: 'https://api.imobify.exemplo.com/documentos',
 };

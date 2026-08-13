@@ -12,10 +12,10 @@
     "isolatedModules": true,
     "experimentalDecorators": true,
     "paths": {
-      "@credito/shared-ui": ["./libs/shared-ui/src/public-api.ts"],
-      "@credito/shared-models": ["./libs/shared-models/src/public-api.ts"],
-      "@credito/shared-utils": ["./libs/shared-utils/src/public-api.ts"],
-      "@credito/shared-state": ["./libs/shared-state/src/public-api.ts"]
+      "@imobify/shared-ui": ["./libs/shared-ui/src/public-api.ts"],
+      "@imobify/shared-models": ["./libs/shared-models/src/public-api.ts"],
+      "@imobify/shared-utils": ["./libs/shared-utils/src/public-api.ts"],
+      "@imobify/shared-state": ["./libs/shared-state/src/public-api.ts"]
     },
     "importHelpers": true,
     "target": "ES2022",
