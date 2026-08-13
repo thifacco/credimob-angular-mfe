@@ -1,17 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 
-import { SimulacaoShell } from './simulacao-shell';
+import { ImoveisList } from './imoveis-list';
 
-describe('SimulacaoShell', () => {
-  let component: SimulacaoShell;
-  let fixture: ComponentFixture<SimulacaoShell>;
+describe('ImoveisList', () => {
+  let component: ImoveisList;
+  let fixture: ComponentFixture<ImoveisList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SimulacaoShell],
+      imports: [ImoveisList],
+      providers: [provideRouter([])],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SimulacaoShell);
+    fixture = TestBed.createComponent(ImoveisList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

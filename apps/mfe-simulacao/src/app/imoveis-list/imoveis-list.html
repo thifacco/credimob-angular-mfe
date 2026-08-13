@@ -1,0 +1,22 @@
+<section class="sim-imoveis-list">
+  <h2>Imóveis disponíveis</h2>
+  <p>Escolha um imóvel para simular o financiamento com a Imobify.</p>
+
+  <div class="sim-imoveis-list__grid">
+    @for (imovel of imoveis; track imovel.id) {
+      <a class="sim-imoveis-list__link" [routerLink]="[imovel.id]">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ imovel.endereco }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ imovel.descricao }}</p>
+            <p class="sim-imoveis-list__valor">
+              {{ imovel.valor | brlCurrency }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    }
+  </div>
+</section>
