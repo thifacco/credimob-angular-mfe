@@ -19,7 +19,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "cacheExternalArtifacts": true
+          },
           "configurations": {
             "production": {
               "target": "shell:esbuild:production"
@@ -37,7 +39,7 @@
             "target": "shell:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
@@ -119,7 +121,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "cacheExternalArtifacts": true
+          },
           "configurations": {
             "production": {
               "target": "mfe-simulacao:esbuild:production"
@@ -137,7 +141,7 @@
             "target": "mfe-simulacao:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
@@ -219,7 +223,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "cacheExternalArtifacts": true
+          },
           "configurations": {
             "production": {
               "target": "mfe-forms:esbuild:production"
@@ -237,7 +243,7 @@
             "target": "mfe-forms:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
@@ -319,7 +325,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "cacheExternalArtifacts": true
+          },
           "configurations": {
             "production": {
               "target": "mfe-uploads:esbuild:production"
@@ -337,7 +345,7 @@
             "target": "mfe-uploads:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
@@ -419,7 +427,9 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {},
+          "options": {
+            "cacheExternalArtifacts": true
+          },
           "configurations": {
             "production": {
               "target": "mfe-proposta:esbuild:production"
@@ -437,7 +447,7 @@
             "target": "mfe-proposta:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
@@ -624,7 +634,8 @@
         "build": {
           "builder": "@angular-architects/native-federation:build",
           "options": {
-            "styles": ["apps/mfe-tracking/src/material-theme.scss"]
+            "styles": ["apps/mfe-tracking/src/material-theme.scss"],
+            "cacheExternalArtifacts": true
           },
           "configurations": {
             "production": {
@@ -643,7 +654,7 @@
             "target": "mfe-tracking:serve-original:development",
             "rebuildDelay": 500,
             "dev": true,
-            "cacheExternalArtifacts": false,
+            "cacheExternalArtifacts": true,
             "port": 0
           }
         },
